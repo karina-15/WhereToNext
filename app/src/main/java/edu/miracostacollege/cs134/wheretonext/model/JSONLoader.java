@@ -39,7 +39,7 @@ public class JSONLoader {
             JSONArray allCollegesJSON = jsonRootObject.getJSONArray("Colleges");
 
             int numberOfColleges = allCollegesJSON.length();
-            // TODO: Loop through all the colleges in the JSON data, create a College object for each
+            // DONE: Loop through all the colleges in the JSON data, create a College object for each
             for (int i = 0; i < numberOfColleges; i++) {
                 JSONObject collegesJSON = allCollegesJSON.getJSONObject(i);
                 College college = new College();
@@ -50,7 +50,7 @@ public class JSONLoader {
                 college.setRating(collegesJSON.getDouble("Rating"));
                 college.setImageName(collegesJSON.getString("FileName"));
 
-                // TODO: Add each college object to the list
+                // DONE: Add each college object to the list
                 allCollegesList.add(college);
             }
 

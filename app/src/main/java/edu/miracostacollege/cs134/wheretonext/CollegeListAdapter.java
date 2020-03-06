@@ -2,12 +2,20 @@ package edu.miracostacollege.cs134.wheretonext;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,11 +63,29 @@ public class CollegeListAdapter extends ArrayAdapter<College> {
         View view = inflater.inflate(mResourceId, null);
 
 
-        // TODO:  Write the code to correctly inflate the view (college_list_item) with
-        LinearLayout collegeLinearLayout = view.findViewById(R.id.collegeEntryLinearLayout);
+        // DONE:  Write the code to correctly inflate the view (college_list_item) with
+        // DONE:  all widgets filled with the appropriate College information.
+        LinearLayout collegeLinearLayout = view.findViewById(R.id.collegeListLinearLayout);
+        College selectedCollege = mCollegesList.get(pos);
+        collegeLinearLayout.setTag(selectedCollege);
 
-        
-        // TODO:  all widgets filled with the appropriate College information.
+        TextView collegeListNameTextView = view.findViewById(R.id.collegeListNameTextView);
+        collegeListNameTextView.setText(selectedCollege.getName());
+
+        RatingBar collegeListRatingBar = view.findViewById(R.id.collegeListRatingBar);
+        collegeListRatingBar.setRating((float) selectedCollege.getRating());
+
+        ImageView collegeListImageView = view.findViewById(R.id.collegeListImageView);
+        AssetManager am = mContext.getAssets();
+        try{
+            InputStream stream = am.open(selectedCollege.getImageName());
+            Drawable image = Drawable.createFromStream(stream, selectedCollege.getName());
+            collegeListImageView.setImageDrawable(image);
+        }
+        catch(IOException e) {
+            Log.e("Where To Next", "Error loading image" + selectedCollege.getName(), e);
+        }
+
 
 
 

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 public class CollegeDetailsActivity extends AppCompatActivity {
 
@@ -46,12 +47,16 @@ public class CollegeDetailsActivity extends AppCompatActivity {
             Log.e("Where To Next", "Error loading " + imageName, ex);
         }
 
-        NumberFormat currency = NumberFormat.getCurrencyInstance();
+        NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.getDefault());
         NumberFormat thousands = NumberFormat.getIntegerInstance();
 
         collegeDetailsNameTextView.setText(name);
-        collegeDetailsPopulationTextView.setText("Annual Enrollment: " + thousands.format(population));
-        collegeDetailsTuitionTextView.setText("In-state Tuition: " + currency.format(tuition));
+        collegeDetailsPopulationTextView.setText(String.format("%s %s",
+                getText(R.string.population_label),
+                thousands.format(population)));
+        collegeDetailsTuitionTextView.setText(String.format("%s %s",
+                getText(R.string.tuition_label),
+                currency.format(tuition)));
         gameDetailsRatingBar.setRating(rating);
     }
 }

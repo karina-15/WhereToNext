@@ -4,4 +4,6 @@
     <string name="name">Enter name of the college</string>
     <string name="population_hint">Enter total student population</string>
     <string name="tuition_hint">Enter annual in-state tuition</string>
+    <string name="population_label">Annual Enrollment:</string>
+    <string name="tuition_label">In-state Tuition:</string>
 </resources>
